@@ -12,6 +12,7 @@ class HashTable {
         this.buckets = new Array(this.size).fill(null);
     }
 
+    //hashes keys into hashcodes
     hash(key) {
         let hashCode = 0;
         const primeNumber = 31;
@@ -23,6 +24,7 @@ class HashTable {
         return hashCode;
     } 
 
+    //sets a value to a called key
     set(key, value) {
         const index = this.hash(key);
         const newNode = new Node(key, value);
@@ -38,6 +40,7 @@ class HashTable {
         }
     }
 
+    //returns value of called key if exists
     get(key) {
         const index = this.hash(key);
 
@@ -52,6 +55,7 @@ class HashTable {
         }
     }
 
+    //returns true if key exists
     has(key) {
         const index = this.hash(key);
 
@@ -67,6 +71,7 @@ class HashTable {
         return false;
     }
 
+    //removes called key returns true
     remove(key) {
         const index = this.hash(key);
 
@@ -96,6 +101,44 @@ class HashTable {
 
         return false
     }
+
+    //return number of stored keys in map
+    length() {
+
+        let count = 0;
+
+        for (let i = 0; i < this.buckets.length; i++) {
+            let currentNode = this.buckets[i];
+
+            //count each node within each bucket
+            while (currentNode) {
+                count++;
+                currentNode = currentNode.next;
+            }
+        }
+
+        return count;
+    }
+
+    //removes all map entries
+    clear() {
+
+    }
+
+    //returns array containing all keys in map
+    keys() {
+
+    }
+
+    //returns array containing all values
+    values() {
+
+    }
+
+    //returns array containing each key-value pair
+    entries() {
+
+    }
 }
 
 const myMap = new HashTable;
@@ -104,6 +147,8 @@ myMap.set('Chris', 105);
 myMap.set('Chris', 31);
 myMap.set('sihCr', 555);
 myMap.set('sihCr', 5);
+
+console.log(myMap.length());            //2
 
 console.log(myMap.get('Chris'));        //31
 console.log(myMap.get('sihCr'));        //5
