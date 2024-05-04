@@ -129,17 +129,51 @@ class HashTable {
 
     //returns array containing all keys in map
     keys() {
+        let keysArr = [];
 
+        for (let i = 0; i < this.buckets.length; i++) {
+            let currentNode = this.buckets[i];
+
+            while (currentNode) {
+                keysArr.push(currentNode.key);
+                currentNode = currentNode.next;
+            }
+        }
+
+        return keysArr;
+        
     }
 
     //returns array containing all values
     values() {
+        let valuesArr = [];
 
+        for (let i = 0; i < this.buckets.length; i++) {
+            let currentNode = this.buckets[i];
+
+            while (currentNode) {
+                valuesArr.push(currentNode.value);
+                currentNode = currentNode.next;
+            }
+        }
+
+        return valuesArr;
     }
 
     //returns array containing each key-value pair
     entries() {
+        let keyValuesArr = [];
 
+        for (let i = 0; i < this.buckets.length; i++) {
+            let currentNode = this.buckets[i];
+
+            while (currentNode) {
+                keyValuesArr.push([currentNode.key, currentNode.value]);
+                currentNode = currentNode.next;
+            }
+        }
+
+        return keyValuesArr;
     }
 }
 
@@ -151,6 +185,10 @@ myMap.set('sihCr', 555);
 myMap.set('sihCr', 5);
 
 console.log(myMap.length());            //2
+
+console.log(myMap.keys());              //[ 'sihCr', 'Chris' ]
+console.log(myMap.values());            //[ 5, 31 ]
+console.log(myMap.entries());           //[ [ 'sihCr', 5 ], [ 'Chris', 31 ] ]
 
 console.log(myMap.get('Chris'));        //31
 console.log(myMap.get('sihCr'));        //5
@@ -164,3 +202,6 @@ console.log(myMap.has('sihCr'));        //true
 myMap.clear();
 
 console.log(myMap.length());            //0
+console.log(myMap.keys());              //[]   
+console.log(myMap.values());            //[] 
+console.log(myMap.entries());           //[]
