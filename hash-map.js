@@ -14,7 +14,6 @@ class HashTable {
 
     hash(key) {
         let hashCode = 0;
-        
         const primeNumber = 31;
 
         for (let i = 0; i < key.length; i++) {
@@ -52,14 +51,29 @@ class HashTable {
             currentNode = currentNode.next;
         }
     }
+
+    has(key) {
+        const index = this.hash(key);
+
+        if (!this.buckets[index]) return false;
+
+        let currentNode = this.buckets[index];
+
+        while (currentNode) {
+            return currentNode.key === key;   
+        }
+    }
 }
 
 const myMap = new HashTable;
 
-myMap.set('Chris', 31);
 myMap.set('Chris', 105);
-myMap.set('sihCr', 123123);
-myMap.set('sihCr', 05);
+myMap.set('Chris', 31);
+myMap.set('sihCr', 555);
+myMap.set('sihCr', 5);
 
-console.log(myMap.get('Chris'));
-console.log(myMap.get('sihCr'));
+console.log(myMap.get('Chris'));        // Output: 31
+console.log(myMap.get('sihCr'));        // Output: 5
+
+console.log(myMap.has('Chris'));       // Output: true  
+console.log(myMap.has('Catherine'));   // Output: false
