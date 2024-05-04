@@ -122,7 +122,9 @@ class HashTable {
 
     //removes all map entries
     clear() {
-
+        for (let i = 0; i < this.buckets.length; i++) {
+            if (this.buckets[i]) this.buckets[i] = null;
+        }
     }
 
     //returns array containing all keys in map
@@ -158,3 +160,7 @@ console.log(myMap.remove('Chris'));     //true
 
 console.log(myMap.has('Chris'));        //false  
 console.log(myMap.has('sihCr'));        //true
+
+myMap.clear();
+
+console.log(myMap.length());            //0
