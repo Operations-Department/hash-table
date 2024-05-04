@@ -60,8 +60,41 @@ class HashTable {
         let currentNode = this.buckets[index];
 
         while (currentNode) {
-            return currentNode.key === key;   
+            if (currentNode.key === key) return true;
+            currentNode = currentNode.next;   
         }
+
+        return false;
+    }
+
+    remove(key) {
+        const index = this.hash(key);
+
+        if (!this.buckets[index]) return false;
+
+        let currentNode = this.buckets[index];
+        let prevNode = null;
+
+        while (currentNode) {
+
+            if (currentNode.key === key) {
+
+                if (!prevNode) {
+                    //remove the head node
+                    this.buckets[index] = currentNode.next;
+                } else {
+                    //remove node by skipping it
+                    prevNode.next = currentNode.next;
+                }
+
+                return true;
+            }
+
+            prevNode = currentNode;
+            currentNode = currentNode.next;
+        }
+
+        return false
     }
 }
 
@@ -72,8 +105,11 @@ myMap.set('Chris', 31);
 myMap.set('sihCr', 555);
 myMap.set('sihCr', 5);
 
-console.log(myMap.get('Chris'));        // Output: 31
-console.log(myMap.get('sihCr'));        // Output: 5
+console.log(myMap.get('Chris'));        //31
+console.log(myMap.get('sihCr'));        //5
+console.log(myMap.has('Chris'));        //true  
 
-console.log(myMap.has('Chris'));       // Output: true  
-console.log(myMap.has('Catherine'));   // Output: false
+console.log(myMap.remove('Chris'));     //true
+
+console.log(myMap.has('Chris'));        //false  
+console.log(myMap.has('sihCr'));        //true
